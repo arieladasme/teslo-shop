@@ -3,6 +3,8 @@
 /node_modules
 .yarn
 
+postgres/
+
 # Logs
 logs
 *.log
