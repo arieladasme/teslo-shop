@@ -14,12 +14,13 @@ $ yarn install
 $ docker-compose up -d
 ```
 
-<!-- ## Clone archive and configure environment variables
+## Clone archive and configure environment variables
 
 ```bash
 .env.template to .env
 ```
 
+<!--
 ## Running app on dev
 
 ```bash
