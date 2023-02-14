@@ -38,7 +38,7 @@ export class Product {
   tags: string[]
 
   @OneToMany(() => ProductImage, (productImage) => productImage.product, { cascade: true })
-  images?: ProductImage
+  images?: ProductImage[]
 
   @BeforeInsert()
   @BeforeUpdate()
