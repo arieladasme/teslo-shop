@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
+import { validate as isUUID } from 'uuid'
 import { PaginationDto } from 'src/common/dtos/pagination.dto'
 import { CreateProductDto } from './dto/create-product.dto'
 import { UpdateProductDto } from './dto/update-product.dto'
@@ -38,9 +39,17 @@ export class ProductsService {
     return await this.productRepository.find({ take: limit, skip: offset })
   }
 
-  async findOne(id: string) {
-    const product = await this.productRepository.findOne({ where: { id } }) //.findOneBy({ id })
-    if (!product) throw new NotFoundException(`product ${id} not found`)
+  async findOne(value: string) {
+    let product: Product
+
+    if (isUUID(value)) {
+      product = await this.productRepository.findOneBy({ id: value })
+    } else {
+      product = await this.productRepository.findOneBy({ slug: value })
+    }
+
+    // const product = await this.productRepository.findOne({ where: { id } }) //.findOneBy({ id })
+    if (!product) throw new NotFoundException(`product ${value} not found`)
 
     return product
   }
