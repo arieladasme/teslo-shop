@@ -6,13 +6,13 @@ import {
   NotFoundException,
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
+import { PaginationDto } from 'src/common/dtos/pagination.dto'
 import { Repository } from 'typeorm'
 import { validate as isUUID } from 'uuid'
-import { PaginationDto } from 'src/common/dtos/pagination.dto'
 import { CreateProductDto } from './dto/create-product.dto'
 import { UpdateProductDto } from './dto/update-product.dto'
-import { Product } from './entities/product.entity'
 import { ProductImage } from './entities'
+import { Product } from './entities/product.entity'
 
 @Injectable()
 export class ProductsService {
@@ -43,7 +43,16 @@ export class ProductsService {
   async findAll(paginationDto: PaginationDto) {
     const { limit = 10, offset = 0 } = paginationDto
 
-    return await this.productRepository.find({ take: limit, skip: offset })
+    const products = await this.productRepository.find({
+      take: limit,
+      skip: offset,
+      relations: { images: true },
+    })
+
+    return products.map((product) => ({
+      ...product,
+      images: product.images.map((img) => img.url),
+    }))
   }
 
   async findOne(value: string) {
@@ -52,18 +61,24 @@ export class ProductsService {
     if (isUUID(value)) {
       product = await this.productRepository.findOneBy({ id: value })
     } else {
-      const query = this.productRepository.createQueryBuilder()
+      const query = this.productRepository.createQueryBuilder('prod')
       product = await query
         .where('UPPER(title)=:title or slug=:slug', {
           title: value.toUpperCase(),
           slug: value.toLowerCase(),
         })
+        .leftJoinAndSelect('prod.images', 'prodImages')
         .getOne()
     }
 
     if (!product) throw new NotFoundException(`product ${value} not found`)
 
     return product
+  }
+
+  findOnePlain = async (value: string) => {
+    const { images = [], ...rest } = await this.findOne(value)
+    return { ...rest, images: images.map((image) => image.url) }
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
