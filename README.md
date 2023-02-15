@@ -14,24 +14,17 @@ $ yarn install
 $ docker-compose up -d
 ```
 
-## Clone archive and configure environment variables
+## Excecute seed
 
 ```bash
-.env.template to .env
+http://localhost:3000/api/seed
 ```
 
-<!--
 ## Running app on dev
 
 ```bash
 $ yarn start:dev
 ```
-
-## Rebuild database with seed
-
-```bash
-http://localhost:3000/api/v2/seed
-``` -->
 
 ## Stack
 
