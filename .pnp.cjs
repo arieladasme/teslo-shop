@@ -39,6 +39,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nestjs/typeorm", "virtual:687ab03715044307b540235f4d91ec37bf0ea4be1e9196cab92ef69c0eafe308a22b34a71ec6b6bad79f345029148d705bda0269f6bb50e80d2a527e2d55c799#npm:9.0.1"],\
             ["@types/express", "npm:4.17.16"],\
             ["@types/jest", "npm:29.2.4"],\
+            ["@types/multer", "npm:1.4.7"],\
             ["@types/node", "npm:18.11.18"],\
             ["@types/supertest", "npm:2.0.12"],\
             ["@types/uuid", "npm:9.0.0"],\
@@ -1993,6 +1994,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/serve-static", "npm:1.15.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:4.17.17", {\
+          "packageLocation": "./.yarn/cache/@types-express-npm-4.17.17-46fe8173db-0196dacc27.zip/node_modules/@types/express/",\
+          "packageDependencies": [\
+            ["@types/express", "npm:4.17.17"],\
+            ["@types/body-parser", "npm:1.19.2"],\
+            ["@types/express-serve-static-core", "npm:4.17.33"],\
+            ["@types/qs", "npm:6.9.7"],\
+            ["@types/serve-static", "npm:1.15.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@types/express-serve-static-core", [\
@@ -2071,6 +2083,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-mime-npm-3.0.1-dec03536dc-4040fac73f.zip/node_modules/@types/mime/",\
           "packageDependencies": [\
             ["@types/mime", "npm:3.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/multer", [\
+        ["npm:1.4.7", {\
+          "packageLocation": "./.yarn/cache/@types-multer-npm-1.4.7-df3819be8e-680cb0710a.zip/node_modules/@types/multer/",\
+          "packageDependencies": [\
+            ["@types/multer", "npm:1.4.7"],\
+            ["@types/express", "npm:4.17.17"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -8358,6 +8380,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nestjs/typeorm", "virtual:687ab03715044307b540235f4d91ec37bf0ea4be1e9196cab92ef69c0eafe308a22b34a71ec6b6bad79f345029148d705bda0269f6bb50e80d2a527e2d55c799#npm:9.0.1"],\
             ["@types/express", "npm:4.17.16"],\
             ["@types/jest", "npm:29.2.4"],\
+            ["@types/multer", "npm:1.4.7"],\
             ["@types/node", "npm:18.11.18"],\
             ["@types/supertest", "npm:2.0.12"],\
             ["@types/uuid", "npm:9.0.0"],\
