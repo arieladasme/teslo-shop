@@ -6,14 +6,16 @@ import { JwtModule } from '@nestjs/jwt'
 import { User } from './entities/user.entity'
 import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
+import { JwtStrategy } from './strategies/jwt.strategy'
 
-//console.log(process.env.JWT_SECRET)
-//console.log(configService.get('JWT_SECRET'))
+//process.env.JWT_SECRET
+//configService.get('JWT_SECRET')
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy],
   imports: [
+    ConfigModule,
     TypeOrmModule.forFeature([User]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
@@ -23,8 +25,7 @@ import { AuthService } from './auth.service'
         return { secret: configService.get('JWT_SECRET'), signOptions: { expiresIn: '2h' } }
       },
     }),
-    // JwtModule.register({ secret: process.env.JWT_SECRET, signOptions: { expiresIn: '2h' } }),
   ],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, JwtStrategy, PassportModule, JwtModule],
 })
 export class AuthModule {}
